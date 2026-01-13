@@ -11,11 +11,11 @@ namespace BoleBiljart
         {
             _authClient = authClient;
             InitializeComponent();
-            Routing.RegisterRoute("//LoginTab/Login", typeof(LoginPage));
-            Routing.RegisterRoute("//RegisterTab/Register", typeof(RegisterPage));
-            Routing.RegisterRoute("//GameHistoryTab/GameHistory", typeof(GameHistoryPage));
-            Routing.RegisterRoute("//GameEditorTab/GameEditor", typeof(GameEditorPage));
-            Routing.RegisterRoute("//UserStatsTab/UserStats", typeof(UserStatsPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(GameHistoryPage), typeof(GameHistoryPage));
+            Routing.RegisterRoute(nameof(GameEditorPage), typeof(GameEditorPage));
+            Routing.RegisterRoute(nameof(UserStatsPage), typeof(UserStatsPage));
             BindingContext = vm;
 
             if (authClient.User != null)

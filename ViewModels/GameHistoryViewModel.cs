@@ -1,4 +1,5 @@
 ﻿using BoleBiljart.Models;
+using BoleBiljart.Pages;
 using BoleBiljart.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -22,7 +23,7 @@ namespace BoleBiljart.Viewmodels
         [RelayCommand]
         async Task EditGame(Game game)
         {
-            await Shell.Current.GoToAsync("//GameEditorTab/GameEditor", false,
+            await Shell.Current.GoToAsync(nameof(GameEditorPage), false,
                 new Dictionary<string, object> { { "SelectedGame", game }, { "IsNewGame", false } });
         }
 

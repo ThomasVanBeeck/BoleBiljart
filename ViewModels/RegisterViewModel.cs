@@ -98,7 +98,7 @@ namespace BoleBiljart.Viewmodels
         [RelayCommand]
         private async Task GotoLogin()
         {
-            await Shell.Current.GoToAsync("//LoginTab/Login");
+            await Shell.Current.GoToAsync(nameof(LoginPage));
         }
     }
 }

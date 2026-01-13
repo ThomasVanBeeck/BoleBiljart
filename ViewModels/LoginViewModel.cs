@@ -60,7 +60,7 @@ namespace BoleBiljart.Viewmodels
         [RelayCommand]
         private async Task GotoRegister()
         {
-            await Shell.Current.GoToAsync("//RegisterTab/Register");
+            await Shell.Current.GoToAsync(nameof(RegisterPage));
         }
     }
 }
