@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BoleBiljart.Pages.GameHistoryPage"
+             Title="Wedstrijd geschiedenis"
+             xmlns:vm="clr-namespace:BoleBiljart.Viewmodels"
+             xmlns:msymbols="clr-namespace:UraniumUI.Icons.MaterialSymbols;assembly=UraniumUI.Icons.MaterialSymbols"
+             xmlns:models="clr-namespace:BoleBiljart.Models"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:converters="clr-namespace:BoleBiljart.Converters"
+             x:DataType="vm:GameHistoryViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToColorConverter x:Key="BallColorConverter" 
+                                         TrueColor="White" 
+                                         FalseColor="#eeee00"/>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Biljartbal" TargetType="Border">
+                <Setter Property="WidthRequest" Value="18"/>
+                <Setter Property="HeightRequest" Value="18"/>
+                <Setter Property="StrokeShape" Value="Ellipse"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Avatar" TargetType="Border">
+                <Setter Property="WidthRequest" Value="80"/>
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 25"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="StrokeThickness" Value="2"/>
+                <Setter Property="Stroke" Value="#5500dd"/>
+                <Setter Property="Padding" Value="0,0"/>
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="BackgroundColor" Value="#222222"/>
+                <Setter Property="Padding" Value="3,3"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 12"/>
+            </Style>
+            <Style TargetType="VerticalStackLayout">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Spacing" Value="3"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <CollectionView ItemsSource="{Binding Games}" VerticalOptions="StartAndExpand">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Game">
+                <Border Margin="10,5">
+                    <Grid RowSpacing="3" Padding="0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border StrokeShape="RoundRectangle 5" BackgroundColor="#333535" Padding="9,1" Grid.Column="2" Grid.Row="0">
+                            <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding YearMonthDay}" FontSize="Subtitle"/>
+                        </Border>
+                        <Button BackgroundColor="Transparent" Grid.Column="4" Grid.Row="0"
+                                
+                                        Command="{Binding BindingContext.EditGameCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding .}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="MaterialSharp" Glyph="{x:Static msymbols:MaterialRounded.Settings}" Color="White"/>
+                            </Button.ImageSource>
+                        </Button>
+
+                        <VerticalStackLayout Spacing="0" Padding="0,0" HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                            <Border Style="{StaticResource Avatar}">
+                                <Image Source="avatar_jef.png" Aspect="AspectFill"/>
+                            </Border>
+                            <Label HorizontalTextAlignment="Center" Text="{Binding Player1Username}" FontSize="Subtitle"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="0" Padding="0,0" HorizontalOptions="Center" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1">
+                            <Border Style="{StaticResource Avatar}">
+                                <Image Source="avatar_thomas.png" Aspect="AspectFill"/>
+                            </Border>
+                            <Label HorizontalTextAlignment="Center" Text="{Binding Player2Username}" FontSize="Subtitle"/>
+                        </VerticalStackLayout>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Player1Score}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"/>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Player2Score}" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2"/>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding TargetScore, StringFormat='Score: {0}'}" Grid.Column="2" Grid.Row="2" FontSize="Subtitle"/>
+
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Player1HighRun}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"/>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Player2HighRun}" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3"/>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Hoogste Reeks" Grid.Column="2" Grid.Row="3" FontSize="Subtitle"/>
+
+                        <Border BackgroundColor="{Binding HasWhiteBall, Converter={StaticResource BallColorConverter}}"
+                                            HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource Biljartbal}"/>
+                        <Border BackgroundColor="{Binding HasWhiteBall, Converter={StaticResource BallColorConverter}, ConverterParameter=Invert}"
+                                            HorizontalOptions="Center" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource Biljartbal}"/>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Speelbal" Grid.Column="2" Grid.Row="4" FontSize="Subtitle"/>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

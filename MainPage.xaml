@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BoleBiljart"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             x:Class="BoleBiljart.MainPage"
+             Title="Wedstrijden">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Biljartbal" TargetType="Border">
+                <Setter Property="WidthRequest" Value="18"/>
+                <Setter Property="HeightRequest" Value="18"/>
+                <Setter Property="StrokeShape" Value="Ellipse"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Avatar" TargetType="Border">
+                <Setter Property="WidthRequest" Value="80"/>
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 25"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="StrokeThickness" Value="2"/>
+                <Setter Property="Stroke" Value="#5500dd"/>
+                <Setter Property="Padding" Value="0,0"/>
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="BackgroundColor" Value="#222222"/>
+                <Setter Property="Padding" Value="3,3"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 15,0,0,15"/>
+            </Style>
+            <Style TargetType="VerticalStackLayout">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Spacing" Value="3"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="10" Background="#333434">
+
+            <Border>
+                <Grid RowSpacing="3" Padding="0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="#333535" Padding="9,1" Grid.Column="2" Grid.Row="0">
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="19/12/2025" FontSize="Subtitle"/>
+                    </Border>
+
+                    <VerticalStackLayout Spacing="0" Padding="0,0" HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                        <Border Style="{StaticResource Avatar}">
+                            <Image Source="avatar_jef.png" Aspect="AspectFill"/>
+                        </Border>
+                        <Label HorizontalTextAlignment="Center" Text="Joseph" FontSize="Subtitle"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="0" Padding="0,0" HorizontalOptions="Center" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1">
+                        <Border Style="{StaticResource Avatar}">
+                            <Image Source="avatar_thomas.png" Aspect="AspectFill"/>
+                        </Border>
+                        <Label HorizontalTextAlignment="Center" Text="Thomas" FontSize="Subtitle"/>
+                    </VerticalStackLayout>
+
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="37" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="15" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Score (25)" Grid.Column="2" Grid.Row="2" FontSize="Subtitle"/>
+
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="8" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="3" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Hoogste Reeks" Grid.Column="2" Grid.Row="3" FontSize="Subtitle"/>
+
+                    <Border BackgroundColor="#eeee00" HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource Biljartbal}"/>
+                    <Border BackgroundColor="White" HorizontalOptions="Center" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource Biljartbal}"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Speelbal" Grid.Column="2" Grid.Row="4" FontSize="Subtitle"/>
+                </Grid>
+            </Border>
+
+            <Border>
+                <Grid RowSpacing="3" Padding="0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="#333535" Padding="9,1" Grid.Column="2" Grid.Row="0">
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="20/12/2025" FontSize="Subtitle"/>
+                    </Border>
+
+                    <VerticalStackLayout Spacing="0" Padding="0,0" HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                        <Border Style="{StaticResource Avatar}">
+                            <Image Source="avatar_thomas.png" Aspect="AspectFill"/>
+                        </Border>
+                        <Label HorizontalTextAlignment="Center" Text="Thomas" FontSize="Subtitle"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="0" Padding="0,0" HorizontalOptions="Center" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1">
+                        <Border Style="{StaticResource Avatar}">
+                            <Image Source="avatar_jef.png" Aspect="AspectFill"/>
+                        </Border>
+                        <Label HorizontalTextAlignment="Center" Text="Joseph" FontSize="Subtitle"/>
+                    </VerticalStackLayout>
+
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="42" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="18" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Score (25)" Grid.Column="2" Grid.Row="2" FontSize="Subtitle"/>
+
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="9" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="4" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Hoogste Reeks" Grid.Column="2" Grid.Row="3" FontSize="Subtitle"/>
+
+                    <Border BackgroundColor="White" HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource Biljartbal}"/>
+                    <Border BackgroundColor="#eeee00" HorizontalOptions="Center" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource Biljartbal}"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Speelbal" Grid.Column="2" Grid.Row="4" FontSize="Subtitle"/>
+                </Grid>
+            </Border>
+
+            <Border>
+                <Grid RowSpacing="3" Padding="0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="#333535" Padding="9,1" Grid.Column="2" Grid.Row="0">
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="21/12/2025" FontSize="Subtitle"/>
+                    </Border>
+
+                    <VerticalStackLayout Spacing="0" Padding="0,0" HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                        <Border Style="{StaticResource Avatar}">
+                            <Image Source="avatar_jef.png" Aspect="AspectFill"/>
+                        </Border>
+                        <Label HorizontalTextAlignment="Center" Text="Joseph" FontSize="Subtitle"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="0" Padding="0,0" HorizontalOptions="Center" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1">
+                        <Border Style="{StaticResource Avatar}">
+                            <Image Source="avatar_thomas.png" Aspect="AspectFill"/>
+                        </Border>
+                        <Label HorizontalTextAlignment="Center" Text="Thomas" FontSize="Subtitle"/>
+                    </VerticalStackLayout>
+
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="39" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="17" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Score (25)" Grid.Column="2" Grid.Row="2" FontSize="Subtitle"/>
+
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="5" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Hoogste Reeks" Grid.Column="2" Grid.Row="3" FontSize="Subtitle"/>
+
+                    <Border BackgroundColor="#eeee00" HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource Biljartbal}"/>
+                    <Border BackgroundColor="White" HorizontalOptions="Center" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource Biljartbal}"/>
+                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" Text="Speelbal" Grid.Column="2" Grid.Row="4" FontSize="Subtitle"/>
+                </Grid>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

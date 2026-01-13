@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BoleBiljart.Pages.LoginPage"
+             Title="Login"
+             xmlns:vm="clr-namespace:BoleBiljart.Viewmodels"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             x:DataType="vm:LoginViewModel">
+    <ContentPage.Content>
+        <StackLayout>
+            <VerticalStackLayout Padding="16" Spacing="15">
+                <Label Text="Welkom  bij BoleBiljart!"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" />
+                <material:TextField MaxLength="90" Title="Email" Text="{Binding Email}"/>
+                <material:TextField MaxLength="30" Title="Wachtwoord" Text="{Binding Password}" IsPassword="True"/>
+                <FlexLayout JustifyContent="SpaceAround" Wrap="Wrap">
+                    <Button StyleClass="OutlinedButton" Command="{Binding LoginCommand}" Text="Login"/>
+                    <Button StyleClass="OutlinedButton" Command="{Binding GotoRegisterCommand}" Text="Account nodig? Registreer"/>
+                </FlexLayout>
+                <Label TextColor="Red" Text="{Binding LoginStatus}"/>
+
+            </VerticalStackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

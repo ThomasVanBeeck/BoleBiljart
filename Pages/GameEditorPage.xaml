@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="BoleBiljart.Pages.GameEditorPage"
+                Title="Wedstrijd toevoegen/aanpassen"
+                xmlns:vm="clr-namespace:BoleBiljart.Viewmodels"
+                xmlns:msymbols="clr-namespace:UraniumUI.Icons.MaterialSymbols;assembly=UraniumUI.Icons.MaterialSymbols"
+                xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+                x:DataType="vm:GameEditorViewModel"
+                xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui">
+
+    <input:FormView SubmitCommand="{Binding SubmitCommand}">
+
+        <material:DatePickerField AllowClear="True" BindingContext="" Title="Datum" Icon="{FontImageSource FontFamily=MaterialSharp, Glyph={x:Static msymbols:MaterialRounded.Date_range}}"/>
+
+        <Label Text="Gebruikersnaam"/>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <material:TextField Title="Speler 1" MaxLength="30" Text="{Binding TempGameModel.Player1Username, Mode=TwoWay}"/>
+            <material:TextField Title="Speler 2" MaxLength="30" Text="{Binding TempGameModel.Player2Username, Mode=TwoWay}"/>
+        </HorizontalStackLayout>
+
+        <Label Text="Score"/>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <material:TextField Title="Speler 1" MaxLength="6" Text="{Binding TempGameModel.Player1Score, Mode=TwoWay}"/>
+            <material:TextField Title="Speler 2" MaxLength="6" Text="{Binding TempGameModel.Player2Score, Mode=TwoWay}"/>
+        </HorizontalStackLayout>
+
+        <Label Text="Hoogst gespeelde serie"/>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <material:TextField Title="Speler 1" MaxLength="6" Text="{Binding TempGameModel.Player1HighRun, Mode=TwoWay}"/>
+            <material:TextField Title="Speler 2" MaxLength="6" Text="{Binding TempGameModel.Player2HighRun, Mode=TwoWay}"/>
+        </HorizontalStackLayout>
+
+        <Label Text="Witte speelbal"/>
+        <input:RadioButtonGroupView SelectedItem="{Binding TempGameModel.HasWhiteBall, Mode=TwoWay}">
+            <input:RadioButton Text="Speler 1" Value="Player 1" />
+            <input:RadioButton Text="Speler 2" Value="Player 2"/>
+        </input:RadioButtonGroupView>
+
+        <Label Text="Afstoot"/>
+        <input:RadioButtonGroupView SelectedItem="{Binding TempGameModel.HasOpeningShot, Mode=TwoWay}">
+            <input:RadioButton Text="Speler 1" Value="Player 1"/>
+            <input:RadioButton Text="Speler 2" Value="Player 2"/>
+        </input:RadioButtonGroupView>
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Button
+        Text="Apply Changes"
+                input:FormView.IsSubmitButton="True"/>
+            <Button
+        Text="Cancel"
+            Command="{Binding CancelCommand}"/>
+        </HorizontalStackLayout >
+        <Label Text="{Binding SaveStatus}"/>
+    </input:FormView>
+</ContentPage>

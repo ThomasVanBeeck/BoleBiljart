@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BoleBiljart.Pages.UserStatsPage"
+             Title="Persoonlijke statistieken"
+             xmlns:vm="clr-namespace:BoleBiljart.Viewmodels"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             x:DataType="vm:UserStatsViewModel">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <Label Text="Statistieken gebruiker"/>
+            <Label Text="Email"/>
+            <Label Text="{Binding MainUser.Email}"/>
+            <Label Text="DB Key"/>
+            <Label Text="{Binding MainUser.Key}"/>
+            <Label Text="Username"/>
+            <Label Text="{Binding MainUser.Username}"/>
+            <Label Text="GamesPlayed"/>
+            <Label Text="{Binding MainUser.GamesPlayed}"/>
+            <Label Text="Auth service Uid"/>
+            <Label Text="{Binding AuthId}"/>
+            <Label Text="DB Uid"/>
+            <Label Text="{Binding MainUser.Uid}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
