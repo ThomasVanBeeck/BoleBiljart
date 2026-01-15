@@ -1,5 +1,4 @@
-﻿using BoleBiljart.Pages;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 
@@ -34,7 +33,7 @@ namespace BoleBiljart.Viewmodels
             try
             {
                 await _authClient.SignInWithEmailAndPasswordAsync(Email, Password);
-                // await Shell.Current.GoToAsync("//UserStatsTab/UserStats");
+                await Shell.Current.GoToAsync("//GameHistory");
             }
         catch (FirebaseAuthHttpException ex)
             {
@@ -60,7 +59,7 @@ namespace BoleBiljart.Viewmodels
         [RelayCommand]
         private async Task GotoRegister()
         {
-            await Shell.Current.GoToAsync(nameof(RegisterPage));
+            await Shell.Current.GoToAsync("//Register");
         }
     }
 }

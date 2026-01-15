@@ -70,7 +70,7 @@ namespace BoleBiljart.Viewmodels
                         Email = Email
                     };
                     await _userService.PostAsync(newUser);
-                    await Shell.Current.GoToAsync(nameof(UserStatsPage));
+                    await Shell.Current.GoToAsync("//GameHistory");
                 }
                 else throw new Exception("Authorisatie van nieuwe gebruiker mislukt.");
             }
@@ -98,7 +98,7 @@ namespace BoleBiljart.Viewmodels
         [RelayCommand]
         private async Task GotoLogin()
         {
-            await Shell.Current.GoToAsync(nameof(LoginPage));
+            await Shell.Current.GoToAsync("//Login");
         }
     }
 }

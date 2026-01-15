@@ -1,6 +1,7 @@
 ﻿using Firebase.Database;
 using System.Net;
 using System.Reactive.Linq;
+using Firebase.Database.Query;
 
 namespace BoleBiljart.Services
 {
@@ -26,6 +27,8 @@ namespace BoleBiljart.Services
         {
             return _fbClient
                 .Child(typeof(Models.User).Name)
+                .OrderBy("Uid")
+                .EqualTo(uid)
                 .AsObservable<Models.User>()
                 .Where(x => x.Object != null && x.Object.Uid == uid)
                 .Select(x =>

@@ -8,8 +8,8 @@ namespace BoleBiljart.Pages
 	{
 		public GameHistoryPage (GameHistoryViewModel vm)
 		{
-			InitializeComponent();
 			BindingContext = vm;
+			InitializeComponent();
 		}
 	}
 }

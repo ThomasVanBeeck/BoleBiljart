@@ -38,8 +38,6 @@ namespace BoleBiljart.Services.Mocking
                 Player2Id = "p002",
                 Player2Score = Random.Shared.Next(10, 100),
 
-                PlayerIds = { "p001, p002" },
-
                 TargetScore = 25,
                 YearMonth = yearString + "-" + monthString,
                 YearMonthDay = yearString + "-" + monthString + "-" + dayString,

@@ -1,0 +1,25 @@
+﻿<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BoleBiljart.Navigation.AuthNavBar"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome">
+    
+    <Grid ColumnDefinitions="*,*,*">
+        <Button CornerRadius="0" StyleClass="TextButton" Grid.Column="0" x:Name="BtnUserStats">
+            <Button.ImageSource>
+                <FontImageSource Size="22" FontFamily="FASolid" Glyph="{x:Static fa:Solid.User}" Color="DarkGrey"/>
+            </Button.ImageSource>
+        </Button>
+
+        <Button CornerRadius="0" StyleClass="TextButton"   Grid.Column="1" x:Name="BtnGameEditor">
+            <Button.ImageSource>
+                <FontImageSource Size="22" FontFamily="FASolid" Glyph="{x:Static fa:Solid.SquarePlus}" Color="DarkGrey"/>
+            </Button.ImageSource>
+        </Button>
+
+        <Button CornerRadius="0" StyleClass="TextButton" Grid.Column="2" x:Name="BtnGameHistory">
+            <Button.ImageSource>
+                <FontImageSource Size="22" FontFamily="FASolid" Glyph="{x:Static fa:Solid.Database}" Color="DarkGrey"/>
+            </Button.ImageSource>
+        </Button>
+    </Grid>
+</ContentView>

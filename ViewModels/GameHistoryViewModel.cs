@@ -3,6 +3,8 @@ using BoleBiljart.Pages;
 using BoleBiljart.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Firebase.Auth;
+using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
@@ -11,11 +13,12 @@ namespace BoleBiljart.Viewmodels
     public partial class GameHistoryViewModel : ObservableObject
     {
         private readonly GameService _gameService;
+        private readonly FirebaseAuthClient _authClient;
         private IObservable<Game> _gamesObservable;
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
         [ObservableProperty]
-        private List<Game> _games = new();
+        private ObservableCollection<Game> _games = new();
 
         //[ObservableProperty]
         //private ObservableCollection<Game> games = null!;
@@ -23,7 +26,7 @@ namespace BoleBiljart.Viewmodels
         [RelayCommand]
         async Task EditGame(Game game)
         {
-            await Shell.Current.GoToAsync(nameof(GameEditorPage), false,
+            await Shell.Current.GoToAsync("//GameEditor", false,
                 new Dictionary<string, object> { { "SelectedGame", game }, { "IsNewGame", false } });
         }
 
@@ -31,18 +34,34 @@ namespace BoleBiljart.Viewmodels
         [RelayCommand]
         async Task AddGame()
         {
-            await Shell.Current.GoToAsync("//GameEditorTab/GameEditor", false,
+            await Shell.Current.GoToAsync("GameEditor", false,
                 new Dictionary<string, object> { { "SelectedGame", new Game() }, { "IsNewGame", true } });
         }
         */
 
-        public GameHistoryViewModel(GameService gameService, UserService userService)
+        public GameHistoryViewModel(GameService gameService, UserService userService, FirebaseAuthClient authClient)
         {
             _gameService = gameService;
-            _gamesObservable = gameService.GetAllAsync();
+            _authClient = authClient;
+            _gamesObservable = gameService.GetAllByUid(_authClient.User.Uid);
 
             var subscription = _gamesObservable
-                .Subscribe(game => Games.Add(game));
+                .Subscribe(game =>
+                {
+                    if (!Games.Any(g => g.Key == game.Key))
+                        Games.Add(game);
+                });
+
+            /*
+            var subscription = _gamesObservable
+               .Subscribe(game =>
+               {
+                   MainThread.BeginInvokeOnMainThread(() =>
+                   {
+                       Games.Add(game);
+                   });
+               });
+            */
             _disposables.Add(subscription);
 
             // Games = new ObservableCollection<Game>();

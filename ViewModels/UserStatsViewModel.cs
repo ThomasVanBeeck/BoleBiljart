@@ -1,6 +1,4 @@
-﻿
-
-using BoleBiljart.Services;
+﻿using BoleBiljart.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Firebase.Auth;
 using System.Reactive.Disposables;
@@ -18,13 +16,9 @@ namespace BoleBiljart.Viewmodels
         [ObservableProperty]
         private Models.User _mainUser = null!;
 
-        [ObservableProperty]
-        private string _authId;
-
         public UserStatsViewModel(UserService userService, FirebaseAuthClient authClient)
         {
             _authClient = authClient;
-            AuthId = _authClient.User.Uid;
             _userService = userService;
             _userObservable = userService.GetByUidAsync(_authClient.User.Uid);
 

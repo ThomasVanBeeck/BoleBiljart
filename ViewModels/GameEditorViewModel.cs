@@ -52,19 +52,22 @@ namespace BoleBiljart.Viewmodels
             // Stap 1: Spelers ophalen
             if (!await GetPlayers()) return;
 
-            // Stap 2: Game data opslaan
+            // Stap 2: Game data verwerken en opslaan
             if (!await SaveGameChanges()) return;
 
             // Stap 3: User statistieken bijwerken
             if (!await SaveUserChanges()) return;
 
-            // Alles gelukt? Dan pas terug navigeren
+            // Stap 4: Status en/of navigeren bij succes
             SaveStatus = "Opslaan succesvol voltooid.";
         }
 
         [RelayCommand]
         private async Task<bool> SaveGameChanges()
         {
+            TempGameModel.Player1Id = _player1.Uid;
+            TempGameModel.Player2Id = _player2.Uid;
+
             SaveStatus = "Save Game changes start...";
             try
             {
@@ -263,8 +266,6 @@ namespace BoleBiljart.Viewmodels
                 Player2HighRun = gameModel.Player2HighRun,
                 Player2Score = gameModel.Player2Score,
                 Player2Username = gameModel.Player2Username,
-
-                PlayerIds = [.. gameModel.PlayerIds],
 
                 TargetScore = gameModel.TargetScore,
                 YearMonth = gameModel.YearMonth,

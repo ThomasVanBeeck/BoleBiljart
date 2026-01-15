@@ -5,66 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:BoleBiljart"
     xmlns:pages="clr-namespace:BoleBiljart.Pages"
-    xmlns:msymbols="clr-namespace:UraniumUI.Icons.MaterialSymbols;assembly=UraniumUI.Icons.MaterialSymbols"
     xmlns:vm="clr-namespace:BoleBiljart.ViewModels"
-    xmlns:conv="clr-namespace:BoleBiljart.Converters"
-    x:DataType="vm:AppShellViewModel"
     Title="BoleBiljart"
     FlyoutBehavior="Disabled">
-
-    <Shell.Resources>
-        <ResourceDictionary>
-            <conv:BoolInversionConverter x:Key="BoolInversionConverter" />
-        </ResourceDictionary>
-    </Shell.Resources>
-
-    <TabBar IsVisible="{Binding IsAuthenticated, Converter={StaticResource BoolInversionConverter}}">
-        <Tab Title="Login" Route="LoginTab">
-            <Tab.Icon>
-                <FontImageSource FontFamily="MaterialSharp" Glyph="{x:Static msymbols:MaterialRounded.Login}" Color="Black"/>
-            </Tab.Icon>
-            <ShellContent
-        ContentTemplate="{DataTemplate pages:LoginPage}"
-        Route="Login"/>
-        </Tab>
-
-        <Tab Title="Registreer" Route="RegisterTab">
-            <Tab.Icon>
-                <FontImageSource FontFamily="MaterialSharp" Glyph="{x:Static msymbols:MaterialRounded.App_registration}" Color="Black"/>
-            </Tab.Icon>
-            <ShellContent
-        ContentTemplate="{DataTemplate pages:RegisterPage}"
-        Route="Register"/>
-        </Tab>
-    </TabBar>
-    
-    <TabBar IsVisible="{Binding IsAuthenticated}">
-        <Tab Title="Geschiedenis" Route="GameHistoryTab">
-            <Tab.Icon>
-                <FontImageSource FontFamily="MaterialSharp" Glyph="{x:Static msymbols:MaterialRounded.History}" Color="Black"/>
-            </Tab.Icon>
-            <ShellContent
-        ContentTemplate="{DataTemplate pages:GameHistoryPage}"
-        Route="GameHistory"/>
-        </Tab>
-
-        <Tab Title="+" Route="GameEditorTab">
-            <Tab.Icon>
-                <FontImageSource FontFamily="MaterialSharp" Glyph="{x:Static msymbols:MaterialRounded.Add_diamond}" Color="Black"/>
-            </Tab.Icon>
-            <ShellContent
-        ContentTemplate="{DataTemplate pages:GameEditorPage}"
-        Route="GameEditor" />
-        </Tab>
-
-        <Tab Title="Gebruiker" Route="UserStatsTab">
-            <Tab.Icon>
-                <FontImageSource FontFamily="MaterialSharp" Glyph="{x:Static msymbols:MaterialRounded.Verified_user}" Color="Black"/>
-            </Tab.Icon>
-            <ShellContent
-        ContentTemplate="{DataTemplate pages:UserStatsPage}"
-        Route="UserStats"/>
-        </Tab>
-    </TabBar>
+    <ShellContent Route="Login"
+        ContentTemplate="{DataTemplate pages:LoginPage}"/>
+    <ShellContent Route="Register"
+        ContentTemplate="{DataTemplate pages:RegisterPage}"/>
+    <ShellContent Route="GameHistory"
+        ContentTemplate="{DataTemplate pages:GameHistoryPage}"/>
+    <ShellContent Route="GameEditor"
+        ContentTemplate="{DataTemplate pages:GameEditorPage}"/>
+    <ShellContent Route="UserStats"
+        ContentTemplate="{DataTemplate pages:UserStatsPage}"/>
 
 </Shell>
