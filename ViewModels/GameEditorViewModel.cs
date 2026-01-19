@@ -1,9 +1,10 @@
 ﻿
 using BoleBiljart.Models;
-using BoleBiljart.Pages;
 using BoleBiljart.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
 namespace BoleBiljart.Viewmodels
@@ -13,9 +14,15 @@ namespace BoleBiljart.Viewmodels
 
     public partial class GameEditorViewModel : ObservableObject
     {
-
         private readonly GameService _gameService;
+        private readonly GlobalLookupService _globalLookupService;
         private readonly UserService _userService;
+
+        private IObservable<Models.GlobalLookup> _globalLookupObservable;
+        private readonly CompositeDisposable _disposables = new CompositeDisposable();
+
+        [ObservableProperty]
+        private Models.GlobalLookup _gLookup = null!;
 
         [ObservableProperty]
         private Game? originalGameModel;
@@ -30,11 +37,6 @@ namespace BoleBiljart.Viewmodels
         [ObservableProperty]
         private Game tempGameModel = new();
 
-        public GameEditorViewModel(GameService gameService, UserService userService)
-        {
-            _gameService = gameService;
-            _userService = userService;
-        }
 
         //private IObservable<Models.User> _p1Observable;
         //private IObservable<Models.User> _p2Observable;
@@ -44,22 +46,63 @@ namespace BoleBiljart.Viewmodels
 
         private List<Models.User> _playerlist = new List<Models.User>();
 
+        public GameEditorViewModel(GameService gameService,
+            GlobalLookupService globalLookupService,
+            UserService userService)
+        {
+            _gameService = gameService;
+            _globalLookupService = globalLookupService;
+            _userService = userService;
+            _globalLookupObservable = _globalLookupService.GetByUidAsync("singleton");
+
+            // aanmaken vd singleton in db, code 1x uitvoeren in development
+            //Models.GlobalLookup glookup = new();
+            //_globalLookupService.PostAsync(glookup);
+
+            var subscription = _globalLookupObservable
+                .Where(gl => gl.Uid == "singleton")
+                .Subscribe(gl => GLookup = gl);
+            _disposables.Add(subscription);
+        }
+
         [RelayCommand]
         private async Task Submit()
         {
+            if (tempGameModel.Player1Username == null || tempGameModel.Player2Username == null)
+            {
+                SaveStatus = "Vul de spelersnamen in.";
+                return;
+            }
+
+            else if (tempGameModel.Player1Username != null && !GLookup.Usernames.ContainsKey(tempGameModel.Player1Username))
+            {
+                SaveStatus = "Naam van speler 1 is niet correct.";
+                return;
+            }
+
+            else if (tempGameModel.Player2Username != null && !GLookup.Usernames.ContainsKey(tempGameModel.Player2Username))
+            {
+                SaveStatus = "Naam van speler 2 is niet correct.";
+                return;
+            }
+
             SaveStatus = "Bezig met verwerken...";
 
             // Stap 1: Spelers ophalen
             if (!await GetPlayers()) return;
 
-            // Stap 2: Game data verwerken en opslaan
-            if (!await SaveGameChanges()) return;
-
             // Stap 3: User statistieken bijwerken
             if (!await SaveUserChanges()) return;
 
+            // Stap 2: Game data verwerken en opslaan
+            if (!await SaveGameChanges()) return;
+
+
             // Stap 4: Status en/of navigeren bij succes
             SaveStatus = "Opslaan succesvol voltooid.";
+            // Even pauze voor verder navigeren
+            await Task.Delay(200);
+            await Shell.Current.GoToAsync("//GameHistory");
         }
 
         [RelayCommand]
@@ -67,6 +110,9 @@ namespace BoleBiljart.Viewmodels
         {
             TempGameModel.Player1Id = _player1.Uid;
             TempGameModel.Player2Id = _player2.Uid;
+
+            TempGameModel.YearMonth = $"{TempGameModel.Datetime.Year}-{TempGameModel.Datetime.Month}"; 
+            TempGameModel.YearMonthDay = $"{TempGameModel.Datetime.Day}-{TempGameModel.Datetime.Month}-{TempGameModel.Datetime.Year}";
 
             SaveStatus = "Save Game changes start...";
             try
@@ -134,8 +180,9 @@ namespace BoleBiljart.Viewmodels
                 // ** edit van een spel **
                 if (!IsNewGame && OriginalGameModel != null)
                 {
+                    // check of user records ongedaan gemaakt moeten worden
 
-                    
+
                     int scoreOriginalGame = 0;
                     // belangrijk: momenteel is gelijkspel ook gerekend als winst
                     // normaal speel je gewoon door tot iemand wint en wijzig je eventueel totaal aantal beurten
@@ -148,6 +195,22 @@ namespace BoleBiljart.Viewmodels
                         scoreOriginalGame = OriginalGameModel.Player1Score;
                         highrunOriginalGame = OriginalGameModel.Player1HighRun;
                         hasWonOriginalGame = (OriginalGameModel.Player1Score >= OriginalGameModel.Player2Score);
+
+                            // check records PLAYER 1
+
+                        if (OriginalGameModel.Key == p.HighrunRecordGameKey &&
+                                OriginalGameModel.Player1HighRun > TempGameModel.Player1HighRun &&
+                                OriginalGameModel.Player1HighRun == p.HighrunRecord)
+                        {
+                            // TODO: ophalen record door alle voorgaande games te checken op Highrun waarde
+                        }
+
+                        if (OriginalGameModel.Key == p.ScoreRecordGameKey &&
+                            OriginalGameModel.Player1Score > TempGameModel.Player1Score &&
+                            OriginalGameModel.Player1Score == p.ScoreRecord)
+                        {
+                            // TODO: ophalen record door alle voorgaande games te checken op Score waarde
+                        }
                     }
                     else
                     {
@@ -155,7 +218,25 @@ namespace BoleBiljart.Viewmodels
                         scoreOriginalGame = OriginalGameModel.Player2Score;
                         highrunOriginalGame = OriginalGameModel.Player2HighRun;
                         hasWonOriginalGame = (OriginalGameModel.Player2Score >= OriginalGameModel.Player1Score);
+
+                            // check records PLAYER 2
+
+                        if (OriginalGameModel.Key == p.HighrunRecordGameKey &&
+                            OriginalGameModel.Player2HighRun > TempGameModel.Player2HighRun &&
+                            OriginalGameModel.Player2HighRun == p.HighrunRecord)
+                        {
+                            // TODO: ophalen record door alle voorgaande games te checken op Highrun waarde
+                        }
+
+                        if (OriginalGameModel.Key == p.ScoreRecordGameKey &&
+                            OriginalGameModel.Player2Score > TempGameModel.Player1Score &&
+                            OriginalGameModel.Player2Score == p.ScoreRecord)
+                        {
+                            // TODO: ophalen record door alle voorgaande games te checken op Score waarde
+                        }
                     }
+
+
                     // avg score + avg highrun herberekenen
                     // avg herberekenen door originele invoer eerst te verminderen van de avg (= recalculated)
                     // vervolgens nieuwe ingestelde waarde gebruiken om tot nieuwe avg te komen
@@ -216,8 +297,25 @@ namespace BoleBiljart.Viewmodels
                 if (p.HighrunRecord < highrunCurrentGame) p.HighrunRecord = highrunCurrentGame;
 
                 // effectief bijwerken van users in db
+                Debug.Write("just before user saving..");
                 try
                 {
+                    // Bepaal wie de referentie-speler is voor deze vergelijking
+                    var reference = (p == _player1) ? _player1 : _player2;
+                    string label = (p == _player1) ? "PLAYER 1" : "PLAYER 2";
+
+                    Debug.WriteLine($"\n>>>> COMPARING {label} <<<<");
+                    Debug.WriteLine($"Property       | Current (p) | Reference");
+                    Debug.WriteLine($"---------------|-------------|----------");
+                    Debug.WriteLine($"Games Played:  | {p.GamesPlayed,-11} | {reference.GamesPlayed}");
+                    Debug.WriteLine($"Games Won:     | {p.GamesWon,-11} | {reference.GamesWon}");
+                    Debug.WriteLine($"Games Lost:    | {p.GamesLost,-11} | {reference.GamesLost}");
+                    Debug.WriteLine($"Highrun Avg:   | {p.HighrunAvg,-11} | {reference.HighrunAvg}");
+                    Debug.WriteLine($"Highrun Record:| {p.HighrunRecord,-11} | {reference.HighrunRecord}");
+                    Debug.WriteLine($"Score Avg:     | {p.ScoreAvg,-11} | {reference.ScoreAvg}");
+                    Debug.WriteLine($"Score Record:  | {p.ScoreRecord,-11} | {reference.ScoreRecord}");
+                    Debug.WriteLine($">>>> END {label} <<<<\n");
+
 
                     await _userService.UpdateAsync(p);
                 }
@@ -233,7 +331,14 @@ namespace BoleBiljart.Viewmodels
         [RelayCommand]
         private async Task Cancel()
         {
-            await Shell.Current.Navigation.PopAsync();
+            await Shell.Current.GoToAsync("//GameHistory");
+        }
+
+        [RelayCommand]
+        private async Task Delete()
+        {
+            SaveStatus = "Spel wordt verwijderd...";
+            return;
         }
 
         partial void OnOriginalGameModelChanged(Game? value)

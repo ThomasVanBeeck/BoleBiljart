@@ -1,11 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-
-
 	
 	<!-- enable dit stuk voor deployen op Samsung Galaxy -->
-	
-	<!--!
+	<!--
 	<PropertyGroup Condition="$(TargetFramework.Contains('-android'))">
 		<RuntimeIdentifiers>android-arm;android-arm64;android-x64</RuntimeIdentifiers>
 		<AndroidPackageFormat>apk</AndroidPackageFormat>
@@ -14,7 +11,6 @@
 		<AndroidGenerateNoResPackage>false</AndroidGenerateNoResPackage>
 	</PropertyGroup>
 	-->
-
 
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-ios'">
@@ -122,6 +118,18 @@
 		<PackageReference Include="UraniumUI.Icons.FontAwesome" Version="2.14.0" />
 		<PackageReference Include="UraniumUI.Icons.MaterialSymbols" Version="2.14.0" />
 		<PackageReference Include="UraniumUI.Material" Version="2.14.0" />
+	</ItemGroup>
+
+	
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\Avatars\avatar_anime.png" />
+	  <MauiImage Include="Resources\Images\Avatars\avatar_default.png" />
+	  <MauiImage Include="Resources\Images\Avatars\avatar_eekhoorn.png" />
+	  <MauiImage Include="Resources\Images\Avatars\avatar_hoed.png" />
+	  <MauiImage Include="Resources\Images\Avatars\avatar_jef.png" />
+	  <MauiImage Include="Resources\Images\Avatars\avatar_krijt.png" />
+	  <MauiImage Include="Resources\Images\Avatars\avatar_thomas.png" />
+	  <MauiImage Include="Resources\Images\Avatars\avatar_winner.png" />
 	</ItemGroup>
 
 </Project>

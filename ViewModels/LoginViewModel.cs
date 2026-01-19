@@ -20,6 +20,18 @@ namespace BoleBiljart.Viewmodels
         public LoginViewModel(FirebaseAuthClient authClient)
         {
             _authClient = authClient;
+            Task.Run(async () =>
+            {
+                try
+                {
+                    var result = await _authClient.SignInAnonymouslyAsync();
+                    System.Diagnostics.Debug.WriteLine($"[Firebase] Anoniem inloggen geslaagd! User ID: {result.User.Uid}");
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[Firebase] FOUT bij anoniem inloggen: {ex.Message}");
+                }
+            });
         }
 
         [RelayCommand]
@@ -33,7 +45,7 @@ namespace BoleBiljart.Viewmodels
             try
             {
                 await _authClient.SignInWithEmailAndPasswordAsync(Email, Password);
-                await Shell.Current.GoToAsync("//GameHistory");
+                await Shell.Current.GoToAsync("//UserStats");
             }
         catch (FirebaseAuthHttpException ex)
             {

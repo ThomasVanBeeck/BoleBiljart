@@ -4,59 +4,90 @@
                 x:Class="BoleBiljart.Pages.GameEditorPage"
                 Title="Wedstrijd toevoegen/aanpassen"
                 xmlns:vm="clr-namespace:BoleBiljart.Viewmodels"
-                xmlns:msymbols="clr-namespace:UraniumUI.Icons.MaterialSymbols;assembly=UraniumUI.Icons.MaterialSymbols"
+                xmlns:models="clr-namespace:BoleBiljart.Models"
+                xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
                 x:DataType="vm:GameEditorViewModel"
                 xmlns:navigation="clr-namespace:BoleBiljart.Navigation"
+                xmlns:converters="clr-namespace:BoleBiljart.Converters"
                 xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui">
 
-    <Grid RowDefinitions="*, Auto">
+    <Grid RowDefinitions="*, Auto, Auto">
+        <ScrollView>
+            
+
+
         <input:FormView Grid.Row="0" SubmitCommand="{Binding SubmitCommand}">
+            <VerticalStackLayout VerticalOptions="Start" Padding="10" Spacing="5">
+                <material:DatePickerField AllowClear="True" Date="{Binding TempGameModel.Datetime, Mode=TwoWay} " Title="Datum" Icon="{FontImageSource FontFamily=FASolid, Glyph={x:Static fa:Solid.Calendar}}"/>
 
-            <material:DatePickerField AllowClear="True" BindingContext="{Binding TempGameModel.Datetime}" Title="Datum" Icon="{FontImageSource FontFamily=MaterialSharp, Glyph={x:Static msymbols:MaterialRounded.Date_range}}"/>
+                <!--
+        <CollectionView Grid.Row="0" ItemsSource="{Binding GLookup.Usernames}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:GlobalLookup">
+                    <Label Text="{Binding .}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+-->
+                <Label Text="Spelers" Style="{StaticResource TitleLable}"/>
+                <Border Padding="8">
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" ColumnSpacing="30" RowSpacing="10">
+                        <material:TextField MinimumWidthRequest="125" Grid.Column="0" Title="Speler 1" MaxLength="30" Text="{Binding TempGameModel.Player1Username, Mode=TwoWay}"/>
+                        <material:TextField MinimumWidthRequest="125" Grid.Column="1" Title="Speler 2" MaxLength="30" Text="{Binding TempGameModel.Player2Username, Mode=TwoWay}"/>
 
-            <Label Text="Gebruikersnaam"/>
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <material:TextField Title="Speler 1" MaxLength="30" Text="{Binding TempGameModel.Player1Username, Mode=TwoWay}"/>
-                <material:TextField Title="Speler 2" MaxLength="30" Text="{Binding TempGameModel.Player2Username, Mode=TwoWay}"/>
-            </HorizontalStackLayout>
+                    </Grid>
+                </Border>
 
-            <Label Text="Score"/>
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <material:TextField Title="Speler 1" MaxLength="6" Text="{Binding TempGameModel.Player1Score, Mode=TwoWay}"/>
-                <material:TextField Title="Speler 2" MaxLength="6" Text="{Binding TempGameModel.Player2Score, Mode=TwoWay}"/>
-            </HorizontalStackLayout>
+                <Label Text="Scores" Style="{StaticResource TitleLable}"/>
 
-            <Label Text="Hoogst gespeelde serie"/>
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <material:TextField Title="Speler 1" MaxLength="6" Text="{Binding TempGameModel.Player1HighRun, Mode=TwoWay}"/>
-                <material:TextField Title="Speler 2" MaxLength="6" Text="{Binding TempGameModel.Player2HighRun, Mode=TwoWay}"/>
-            </HorizontalStackLayout>
+                <Border Padding="8">
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" ColumnSpacing="30" RowSpacing="10">
+                        <material:TextField MaximumWidthRequest="90" Grid.Column="0" Title="Speler 1" MaxLength="6" Text="{Binding TempGameModel.Player1Score, Mode=TwoWay}"/>
+                        <material:TextField MaximumWidthRequest="90" Grid.Column="1" Title="Speler 2" MaxLength="6" Text="{Binding TempGameModel.Player2Score, Mode=TwoWay}"/>
+                    </Grid>
+                </Border>
 
-            <Label Text="Witte speelbal"/>
-            <input:RadioButtonGroupView SelectedItem="{Binding TempGameModel.HasWhiteBall, Mode=TwoWay}">
-                <input:RadioButton Text="Speler 1" Value="Player 1" />
-                <input:RadioButton Text="Speler 2" Value="Player 2"/>
-            </input:RadioButtonGroupView>
+                <Label Text="Hoogst gespeelde series" Style="{StaticResource TitleLable}"/>
 
-            <Label Text="Afstoot"/>
-            <input:RadioButtonGroupView SelectedItem="{Binding TempGameModel.HasOpeningShot, Mode=TwoWay}">
-                <input:RadioButton Text="Speler 1" Value="Player 1"/>
-                <input:RadioButton Text="Speler 2" Value="Player 2"/>
-            </input:RadioButtonGroupView>
+                <Border Padding="8">
+                    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" ColumnSpacing="30" RowSpacing="10">
+                        <material:TextField MaximumWidthRequest="90" Grid.Column="0" Title="Speler 1" MaxLength="6" Text="{Binding TempGameModel.Player1HighRun, Mode=TwoWay}"/>
+                        <material:TextField MaximumWidthRequest="90" Grid.Column="1" Title="Speler 2" MaxLength="6" Text="{Binding TempGameModel.Player2HighRun, Mode=TwoWay}"/>
+                    </Grid>
+                </Border>
 
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Button
-        Text="Apply Changes"
-                input:FormView.IsSubmitButton="True"/>
-                <Button
-        Text="Cancel"
-            Command="{Binding CancelCommand}"/>
-            </HorizontalStackLayout >
-            <Label Text="{Binding SaveStatus}"/>
+
+                <Label Text="Witte speelbal" Style="{StaticResource TitleLable}"/>
+
+                <Border Padding="8">
+                    <input:RadioButtonGroupView SelectedItem="{Binding TempGameModel.HasWhiteBall, Mode=TwoWay}">
+                        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" ColumnSpacing="30" RowSpacing="10">
+                            <input:RadioButton Grid.Column="0" Text="Speler 1" Value="Player 1" />
+                            <input:RadioButton Grid.Column="1" Text="Speler 2" Value="Player 2"/>
+                        </Grid>
+                    </input:RadioButtonGroupView>
+                </Border>
+                <Label Text="Afstoot" Style="{StaticResource TitleLable}"/>
+                <Border Padding="8">
+                    <input:RadioButtonGroupView SelectedItem="{Binding TempGameModel.HasOpeningShot, Mode=TwoWay}">
+                        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" ColumnSpacing="30" RowSpacing="10">
+                            <input:RadioButton Grid.Column="0" Text="Speler 1" Value="Player 1" />
+                            <input:RadioButton Grid.Column="1" Text="Speler 2" Value="Player 2"/>
+                        </Grid>
+                    </input:RadioButtonGroupView>
+                </Border>
+                <Label Text="{Binding SaveStatus}"/>
+
+            </VerticalStackLayout>
+                <HorizontalStackLayout Spacing="20" Grid.Row="1" Margin="5" HorizontalOptions="Center">
+                <Button StyleClass="OutlinedButton" BorderColor="{StaticResource CustomPurpleLight}" Text="OK" input:FormView.IsSubmitButton="True"/>
+                    <Button StyleClass="OutlinedButton" BorderColor="{StaticResource CustomPurpleLight}" Text="Annuleren" Command="{Binding CancelCommand}"/>
+                    <Button StyleClass="OutlinedButton" BorderColor="{StaticResource CustomPurpleLight}" Text="Verwijderen" Command="{Binding DeleteCommand}" IsVisible="{Binding IsNewGame, Converter={StaticResource BoolInversionConverter}}"/>
+                </HorizontalStackLayout >
         </input:FormView>
-
-        <navigation:AuthNavBar Grid.Row="1" ActiveTab="GameEditor"/>        
+        </ScrollView>
+        <navigation:AuthNavBar Grid.Row="2" ActiveTab="GameEditor"/>
+            
     </Grid>
-
 </ContentPage>

@@ -10,6 +10,7 @@ namespace BoleBiljart
         public AppShell(FirebaseAuthClient authClient)
         {
             _authClient = authClient;
+
             InitializeComponent();
 
             if (authClient.User != null)
@@ -18,7 +19,7 @@ namespace BoleBiljart
                 // Gebruik een kleine delay of Dispatcher om te zorgen dat de UI klaar is
                 Dispatcher.Dispatch(async () =>
                 {
-                    await Shell.Current.GoToAsync(nameof(UserStatsPage));
+                    await Shell.Current.GoToAsync("//UserStats");
                 });
             }
         }

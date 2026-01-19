@@ -44,9 +44,9 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-    <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryDarkText}" />
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDark}" />
+    <Style TargetType="Button" Class="OutlinedButton">
+        <Setter Property="TextColor" Value="{StaticResource CustomPurpleLight}" />
+        <Setter Property="BorderColor" Value="{StaticResource CustomPurpleLight}"/>
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="CornerRadius" Value="8"/>

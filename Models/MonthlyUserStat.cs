@@ -3,7 +3,7 @@ using BoleBiljart.Interfaces;
 
 namespace BoleBiljart.Models
 {
-    internal class MonthlyUserStat  : IModelHasKey
+    public class MonthlyUserStat  : IModelHasKey
     {
         public string Key { get; set; } = null!;
 

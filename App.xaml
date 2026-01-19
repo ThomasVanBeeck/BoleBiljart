@@ -3,9 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BoleBiljart"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:converters="clr-namespace:BoleBiljart.Converters"
              x:Class="BoleBiljart.App">
     <Application.Resources>
         <ResourceDictionary>
+            <converters:StringToColorConverter x:Key="BallColorConverter" 
+                                   TrueColor="White" 
+                                   FalseColor="#eeee00"/>
+            <converters:BoolInversionConverter x:Key="BoolInversionConverter" />
+
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Default" />
+                <Setter Property="FontAttributes" Value="None"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style TargetType="Border">
+                <Setter Property="BackgroundColor" Value="#222222"/>
+                <Setter Property="Padding" Value="3,3"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 12"/>
+            </Style>
+
+            <Style TargetType="VerticalStackLayout">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Spacing" Value="3"/>
+            </Style>
+
+
+            <Style x:Key="TitleLable" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="Margin" Value="0,10,0,0"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style x:Key="HeaderLable" TargetType="Label">
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style x:Key="Biljartbal" TargetType="Border">
+                <Setter Property="WidthRequest" Value="18"/>
+                <Setter Property="HeightRequest" Value="18"/>
+                <Setter Property="StrokeShape" Value="Ellipse"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+
+            <Style x:Key="Avatar" TargetType="Border">
+                <Setter Property="WidthRequest" Value="80"/>
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 25"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="StrokeThickness" Value="2"/>
+                <Setter Property="Stroke" Value="#5500dd"/>
+                <Setter Property="Padding" Value="0,0"/>
+            </Style>
+
+            <Style x:Key="MainLogo" TargetType="Border">
+                <Setter Property="WidthRequest" Value="150"/>
+                <Setter Property="HeightRequest" Value="150"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 25"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="StrokeThickness" Value="2"/>
+                <Setter Property="Stroke" Value="#5500dd"/>
+                <Setter Property="Padding" Value="0,0"/>
+            </Style>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="appColors" Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary x:Name="appStyles" Source="Resources/Styles/Styles.xaml" />

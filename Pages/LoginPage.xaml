@@ -7,20 +7,23 @@
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              x:DataType="vm:LoginViewModel">
     <ContentPage.Content>
-        <StackLayout>
-            <VerticalStackLayout Padding="16" Spacing="15">
+        <ScrollView>
+            <VerticalStackLayout Padding="16" Spacing="15" VerticalOptions="Start">
                 <Label Text="Welkom  bij BoleBiljart!"
                    VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand" />
+                <Border Style="{StaticResource MainLogo}">
+                    <Image Source="bole_logo2.jpg" Aspect="AspectFill"/>
+                </Border>
                 <material:TextField MaxLength="90" Title="Email" Text="{Binding Email}"/>
                 <material:TextField MaxLength="30" Title="Wachtwoord" Text="{Binding Password}" IsPassword="True"/>
                 <FlexLayout JustifyContent="SpaceAround" Wrap="Wrap">
-                    <Button StyleClass="OutlinedButton" Command="{Binding LoginCommand}" Text="Login"/>
-                    <Button StyleClass="OutlinedButton" Command="{Binding GotoRegisterCommand}" Text="Account nodig? Registreer"/>
+                    <Button StyleClass="OutlinedButton" BorderColor="{StaticResource CustomPurpleLight}" Command="{Binding LoginCommand}" Text="Login"/>
+                    <Button StyleClass="OutlinedButton" BorderColor="{StaticResource CustomPurpleLight}" Command="{Binding GotoRegisterCommand}" Text="Account nodig? Registreer"/>
                 </FlexLayout>
                 <Label TextColor="Red" Text="{Binding LoginStatus}"/>
 
             </VerticalStackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

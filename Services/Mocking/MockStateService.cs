@@ -41,7 +41,7 @@ namespace BoleBiljart.Services.Mocking
             var user = new User();
             user.Key = "userid" + userCounter;
             user.Username = CreateUniqueUsername();
-            user.AvatarUrl = $"mockedUrl{userCounter}";
+            user.AvatarNumber = 1;
             user.GamesLost = gamesLost;
             user.GamesWon = gamesWon;
             user.GamesPlayed = gamesPlayed;

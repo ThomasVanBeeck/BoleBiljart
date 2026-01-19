@@ -1,7 +1,6 @@
 ﻿using BoleBiljart.Pages;
 using BoleBiljart.Services;
 using BoleBiljart.Viewmodels;
-using BoleBiljart.ViewModels;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Database;
@@ -67,11 +66,13 @@ namespace BoleBiljart
             builder.Services.AddTransient<UserStatsPage>();
             builder.Services.AddTransient<UserStatsViewModel>();
 
-            builder.Services.AddSingleton<AppShell>();
-            builder.Services.AddSingleton<AppShellViewModel>();
+            //builder.Services.AddSingleton<AppShell>();
+            //builder.Services.AddSingleton<AppShellViewModel>();
 
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<GameService>();
+            builder.Services.AddSingleton<AvatarService>();
+            builder.Services.AddSingleton<GlobalLookupService>();
 
 
 #if DEBUG

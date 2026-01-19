@@ -12,47 +12,7 @@
              xmlns:navigation="clr-namespace:BoleBiljart.Navigation"
              xmlns:converters="clr-namespace:BoleBiljart.Converters">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:StringToColorConverter x:Key="BallColorConverter" 
-                                         TrueColor="White" 
-                                         FalseColor="#eeee00"/>
-            <Style TargetType="Label">
-                <Setter Property="FontSize" Value="Title" />
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-            </Style>
-            <Style x:Key="Biljartbal" TargetType="Border">
-                <Setter Property="WidthRequest" Value="18"/>
-                <Setter Property="HeightRequest" Value="18"/>
-                <Setter Property="StrokeShape" Value="Ellipse"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-            </Style>
-            <Style x:Key="Avatar" TargetType="Border">
-                <Setter Property="WidthRequest" Value="80"/>
-                <Setter Property="HeightRequest" Value="80"/>
-                <Setter Property="StrokeShape" Value="RoundRectangle 25"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="StrokeThickness" Value="2"/>
-                <Setter Property="Stroke" Value="#5500dd"/>
-                <Setter Property="Padding" Value="0,0"/>
-            </Style>
-            <Style TargetType="Border">
-                <Setter Property="BackgroundColor" Value="#222222"/>
-                <Setter Property="Padding" Value="3,3"/>
-                <Setter Property="StrokeShape" Value="RoundRectangle 12"/>
-            </Style>
-            <Style TargetType="VerticalStackLayout">
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="Spacing" Value="3"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <Grid RowDefinitions="*,Auto">
-
-
         <CollectionView Grid.Row="0" ItemsSource="{Binding Games}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Game">

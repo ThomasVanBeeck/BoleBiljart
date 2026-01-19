@@ -4,24 +4,28 @@
              x:Class="BoleBiljart.Pages.RegisterPage"
              Title="Registreer"
              xmlns:vm="clr-namespace:BoleBiljart.Viewmodels"
+             xmlns:models="clr-namespace:BoleBiljart.Models"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              x:DataType="vm:RegisterViewModel">
     <ContentPage.Content>
-        <StackLayout>
-            <VerticalStackLayout Padding="16" Spacing="15">
+        <ScrollView>
+            <VerticalStackLayout Padding="16" Spacing="15" VerticalOptions="Start">
                 <Label Text="Welkom  bij BoleBiljart!"
-                   VerticalOptions="CenterAndExpand" 
+                   VerticalOptions="Start" 
                    HorizontalOptions="CenterAndExpand" />
+                <Border Style="{StaticResource MainLogo}">
+                    <Image Source="bole_logo2.jpg" Aspect="AspectFill"/>
+                </Border>
                 <material:TextField Title="Gebruikersnaam" MaxLength="30" Text="{Binding Username}"/>
                 <material:TextField Title="Email" MaxLength="90" Text="{Binding Email}"/>
                 <material:TextField Title="Wachtwoord" MaxLength="30" Text="{Binding Password}" IsPassword="True"/>
                 <material:TextField Title="Wachtwoord (controle)" MaxLength="30" Text="{Binding PasswordRepeat}" IsPassword="True"/>
                 <FlexLayout JustifyContent="SpaceAround" Wrap="Wrap">
-                    <Button StyleClass="OutlinedButton" Command="{Binding RegisterCommand}" Text="Registreer"/>
-                    <Button StyleClass="OutlinedButton" Command="{Binding GotoLoginCommand}" Text="Al een account? Log in"/>
+                    <Button StyleClass="OutlinedButton" BorderColor="{StaticResource CustomPurpleLight}" Command="{Binding RegisterCommand}" Text="Registreer"/>
+                    <Button StyleClass="OutlinedButton" BorderColor="{StaticResource CustomPurpleLight}" Command="{Binding GotoLoginCommand}" Text="Al een account? Log in"/>
                 </FlexLayout>
                 <Label TextColor="Red" Text="{Binding RegisterStatus}"/>
             </VerticalStackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

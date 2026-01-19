@@ -1,5 +1,4 @@
 ﻿using Firebase.Database;
-using System.Net;
 using System.Reactive.Linq;
 using Firebase.Database.Query;
 

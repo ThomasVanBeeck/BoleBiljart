@@ -28,7 +28,7 @@ namespace BoleBiljart.ViewModels
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 IsAuthenticated = _authClient.User != null;
-                if (IsAuthenticated) Shell.Current.GoToAsync("//UserStatsTab/UserStats");
+                if (IsAuthenticated) Shell.Current.GoToAsync("//UserStats");
             });
         }
     }

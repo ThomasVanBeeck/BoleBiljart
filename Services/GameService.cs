@@ -12,7 +12,6 @@ namespace BoleBiljart.Services
 
         public IObservable<Game> GetAllByUid(string uid)
         {
-
             var asPlayer1 = _fbClient
                 .Child("Game")
                 .OrderBy("Player1Id")

@@ -8,15 +8,14 @@
     xmlns:vm="clr-namespace:BoleBiljart.ViewModels"
     Title="BoleBiljart"
     FlyoutBehavior="Disabled">
-    <ShellContent Route="Login"
+    <ShellContent Route="Login" Shell.NavBarIsVisible="False"
         ContentTemplate="{DataTemplate pages:LoginPage}"/>
-    <ShellContent Route="Register"
+    <ShellContent Route="Register" Shell.NavBarIsVisible="False"
         ContentTemplate="{DataTemplate pages:RegisterPage}"/>
-    <ShellContent Route="GameHistory"
+    <ShellContent Route="GameHistory" Shell.NavBarIsVisible="False"
         ContentTemplate="{DataTemplate pages:GameHistoryPage}"/>
-    <ShellContent Route="GameEditor"
+    <ShellContent Route="GameEditor" Shell.NavBarIsVisible="False"
         ContentTemplate="{DataTemplate pages:GameEditorPage}"/>
-    <ShellContent Route="UserStats"
+    <ShellContent Route="UserStats" Shell.NavBarIsVisible="False"
         ContentTemplate="{DataTemplate pages:UserStatsPage}"/>
-
 </Shell>

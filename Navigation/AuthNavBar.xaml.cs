@@ -1,4 +1,6 @@
-﻿namespace BoleBiljart.Navigation
+﻿using Android.Media;
+
+namespace BoleBiljart.Navigation
 {
 
     public partial class AuthNavBar : ContentView
@@ -38,15 +40,21 @@
 
         public void SetActiveTab(string tabName)
         {
+            Color activeColor = Colors.White;
+            if (App.Current.Resources.TryGetValue("CustomPurpleLight", out var colorvalue))
+            {
+                activeColor = (Color)colorvalue;
+            }
+
             SetButtonIconColor(BtnUserStats, Colors.DarkGray);
             SetButtonIconColor(BtnGameEditor, Colors.DarkGray);
             SetButtonIconColor(BtnGameHistory, Colors.DarkGray);
 
             switch (tabName)
             {
-                case "UserStats": SetButtonIconColor(BtnUserStats, Colors.White); break;
-                case "GameEditor": SetButtonIconColor(BtnGameEditor, Colors.White); break;
-                case "GameHistory": SetButtonIconColor(BtnGameHistory, Colors.White); break;
+                case "UserStats": SetButtonIconColor(BtnUserStats, activeColor); break;
+                case "GameEditor": SetButtonIconColor(BtnGameEditor, activeColor); break;
+                case "GameHistory": SetButtonIconColor(BtnGameHistory, activeColor); break;
             }
         }
 
