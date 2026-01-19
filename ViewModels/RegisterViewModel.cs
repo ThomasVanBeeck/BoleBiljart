@@ -46,14 +46,14 @@ namespace BoleBiljart.Viewmodels
             _userService = userService;
             _globalLookupObservable = _globalLookupService.GetByUidAsync("singleton");
 
-            // aanmaken vd singleton in db, code 1x uitvoeren in development
-            //Models.GlobalLookup glookup = new();
-            //_globalLookupService.PostAsync(glookup);
-
             var subscription = _globalLookupObservable
                 .Where(gl => gl.Uid == "singleton")
                 .Subscribe(gl => GLookup = gl);
             _disposables.Add(subscription);
+
+            // handig voor aanmaken vd singleton in firebase realtime db, code 1x uitvoeren in development
+            //Models.GlobalLookup glookup = new();
+            //_globalLookupService.PostAsync(glookup);
         }
 
         [RelayCommand]

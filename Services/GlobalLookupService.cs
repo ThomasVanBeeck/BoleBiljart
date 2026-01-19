@@ -7,21 +7,35 @@ namespace BoleBiljart.Services
 {
     public class GlobalLookupService : AbstractBaseService<GlobalLookup>
     {
-        public GlobalLookupService(FirebaseClient fbClient) : base(fbClient) { }
+        private readonly Dictionary<string, IObservable<GlobalLookup>> _cache = new();
 
-        public IObservable<Models.GlobalLookup> GetByUidAsync(string uid)
+        public GlobalLookupService(FirebaseClient fbClient) : base(fbClient) {
+        }
+
+        public IObservable<GlobalLookup> GetByUidAsync(string uid)
         {
-            return _fbClient
-                .Child(typeof(Models.GlobalLookup).Name)
+            if (_cache.TryGetValue(uid, out var cachedObservable))
+            {
+                return cachedObservable;
+            }
+
+            var observable = _fbClient
+                .Child(typeof(GlobalLookup).Name)
                 .OrderBy("Uid")
                 .EqualTo(uid)
-                .AsObservable<Models.GlobalLookup>()
+                .AsObservable<GlobalLookup>()
                 .Where(x => x.Object != null)
                 .Select(x =>
                 {
                     x.Object!.Key = x.Key;
                     return x.Object;
-                });
+                })
+                .Replay(1)
+                .RefCount();
+
+            _cache[uid] = observable;
+
+            return observable;
         }
     }
 }

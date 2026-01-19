@@ -43,8 +43,8 @@
 
                 <Border Padding="8">
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" ColumnSpacing="30" RowSpacing="10">
-                        <material:TextField MaximumWidthRequest="90" Grid.Column="0" Title="Speler 1" MaxLength="6" Text="{Binding TempGameModel.Player1Score, Mode=TwoWay}"/>
-                        <material:TextField MaximumWidthRequest="90" Grid.Column="1" Title="Speler 2" MaxLength="6" Text="{Binding TempGameModel.Player2Score, Mode=TwoWay}"/>
+                            <material:TextField Keyboard="Numeric" MaximumWidthRequest="90" Grid.Column="0" Title="Speler 1" MaxLength="3" Text="{Binding TempGameModel.Player1Score, Mode=TwoWay}"/>
+                            <material:TextField Keyboard="Numeric" MaximumWidthRequest="90" Grid.Column="1" Title="Speler 2" MaxLength="3" Text="{Binding TempGameModel.Player2Score, Mode=TwoWay}"/>
                     </Grid>
                 </Border>
 
@@ -52,8 +52,8 @@
 
                 <Border Padding="8">
                     <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" ColumnSpacing="30" RowSpacing="10">
-                        <material:TextField MaximumWidthRequest="90" Grid.Column="0" Title="Speler 1" MaxLength="6" Text="{Binding TempGameModel.Player1HighRun, Mode=TwoWay}"/>
-                        <material:TextField MaximumWidthRequest="90" Grid.Column="1" Title="Speler 2" MaxLength="6" Text="{Binding TempGameModel.Player2HighRun, Mode=TwoWay}"/>
+                        <material:TextField Keyboard="Numeric" MaximumWidthRequest="90" Grid.Column="0" Title="Speler 1" MaxLength="3" Text="{Binding TempGameModel.Player1HighRun, Mode=TwoWay}"/>
+                        <material:TextField Keyboard="Numeric" MaximumWidthRequest="90" Grid.Column="1" Title="Speler 2" MaxLength="3" Text="{Binding TempGameModel.Player2HighRun, Mode=TwoWay}"/>
                     </Grid>
                 </Border>
 
